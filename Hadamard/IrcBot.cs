@@ -11,9 +11,12 @@ namespace Hadamard
 {
     public class HadamardIrcBot : IrcBot
     {
+        private static string _channel = "#da8Q_9RnPjm";
+
         public HadamardIrcBot() : base()
         {
-            Connect("efnet.port80.se", RegistrationInfo);
+
+            Connect("orwell.freenode.net", RegistrationInfo);
             _commandProcessors = CommandProcessors;
         }
 
@@ -48,7 +51,7 @@ namespace Hadamard
                         {
                             "quit", (command, parameters) =>
                             {
-                                _isRunning = false;
+                                Quit();
                             }
                         }
 
@@ -60,6 +63,18 @@ namespace Hadamard
         {
             
         }
+
+        protected override void OnClientRegistered(IrcClient client)
+        {
+            base.OnClientRegistered(client);
+            client.Channels.Join(_channel);
+        }
+
+        protected override void OnChannelMessageReceived(IrcChannel channel, IrcMessageEventArgs e)
+        {
+            base.OnChannelMessageReceived(channel, e);
+            channel.Client.LocalUser.SendMessage(channel.Name, e.Text.GetHashCode().ToString());
+        }
     }
 
     public abstract class IrcBot
@@ -67,12 +82,12 @@ namespace Hadamard
         public abstract IrcRegistrationInfo RegistrationInfo { get; }
         protected abstract void InitializeCommandProcessors();
 
-        protected virtual void OnClientConnect(IrcClient client) { }
+        protected virtual void OnClientConnected(IrcClient client) { }
         protected virtual void OnClientRegistered(IrcClient client) { }
         protected virtual void OnLocalUserMessageReceived(IrcLocalUser localUser, IrcMessageEventArgs e) { }
         protected virtual void OnChannelMessageReceived(IrcChannel channel, IrcMessageEventArgs e) { }
 
-        public  bool _isRunning;
+        private bool _isRunning;
         private bool _isRegistered;
         protected StandardIrcClient _client;
         protected IDictionary<string, CommandProcessor> _commandProcessors;
@@ -97,14 +112,34 @@ namespace Hadamard
             {
                 FloodPreventer = new IrcStandardFloodPreventer(30, 2000)
             };
-            client.Connected += Client_Connected;
-            client.Registered += Client_Registered;
+            client.Connected += (c, e) =>
+            {
+                Console.WriteLine("+ Client Connected");
+                OnClientConnected(c as IrcClient);
+            };
+            
+            client.Registered += (c, e) =>
+            {
+                _isRegistered = true;
+                Console.WriteLine("+ Client registered");
+                (c as IrcClient).LocalUser.JoinedChannel += (localUser, channelArgs) =>                {
+                    Console.WriteLine("+ Client joined channel " + channelArgs.Channel.Name);
 
+                    channelArgs.Channel.MessageReceived += (channel, messageArgs) =>
+                    {
+                        Console.WriteLine("+ Received channel message: " + messageArgs.Text);
+                        OnChannelMessageReceived(channelArgs.Channel, messageArgs);
+                    };
+                };
+
+                OnClientRegistered(c as IrcClient);
+            };
+            
             using (var connectedEvent = new ManualResetEventSlim(false))
             {
                 client.Connected += (s, e) => connectedEvent.Set();
                 client.Connect(server, false, registrationInfo);
-
+                
                 if(!connectedEvent.Wait(30000))
                 {
                     client.Dispose();
@@ -115,45 +150,9 @@ namespace Hadamard
             _client = client;
         }
 
-        private void Client_Connected(object sender, EventArgs e)
+        public void Quit()
         {
-            var client = sender as IrcClient;
-            Console.WriteLine($"Client connected: {sender.ToString()}");
-            OnClientConnect(client);
-        }
-
-        private void Client_Registered(object sender, EventArgs e)
-        {
-            var client = sender as IrcClient;
-            Console.WriteLine("Client registered.");
-            _isRegistered = true;
-
-            client.LocalUser.JoinedChannel += LocalUser_JoinedChannel;
-                        
-            OnClientRegistered(client);
-        }
-
-        private void LocalUser_JoinedChannel(object sender, IrcChannelEventArgs e)
-        {
-            var localUser = sender as IrcLocalUser;
-            e.Channel.MessageReceived += Channel_MessageReceived;
-        }
-
-        private void Channel_MessageReceived(object sender, IrcMessageEventArgs e)
-        {
-            var channel = sender as IrcChannel;
-            if(e.Source is IrcUser)
-            {
-
-            }
-            OnChannelMessageReceived(channel, e);
-        }
-
-        private void LocalUser_MessageReceived(object sender, IrcMessageEventArgs e)
-        {
-            var localUser = sender as IrcLocalUser;
-
-            OnLocalUserMessageReceived(localUser, e);
+            _isRunning = false;
         }
 
         public void Run()
@@ -182,7 +181,7 @@ namespace Hadamard
         private void ReadCommand(string command, string[] parameters)
         {
             CommandProcessor processor;
-            if (this._commandProcessors.TryGetValue(command, out processor))
+            if (_commandProcessors.TryGetValue(command, out processor))
             {
                 try
                 {
