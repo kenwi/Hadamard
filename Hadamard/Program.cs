@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using IrcDotNet;
+using Hadamard.Common;
 
 namespace Hadamard
 {
@@ -13,8 +13,7 @@ namespace Hadamard
         static void Main(string[] args)
         {
             var hadamard = new HadamardIrcBot();
-            hadamard.Run();
-            
+            hadamard.Run();            
         }
     }
 }
