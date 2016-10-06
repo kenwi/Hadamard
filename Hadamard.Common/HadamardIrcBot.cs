@@ -14,6 +14,10 @@ namespace Hadamard.Common
     {
         private static string _channel = "#da8Q_9RnPjm";
 
+        public IrcLocalUser LocalUser => _client.LocalUser;
+        public IrcChannel ActiveChannel => _client.Channels.First();
+        public IrcClient Client => _client;
+
         public HadamardIrcBot() : base()
         {
             Connect("orwell.freenode.net", RegistrationInfo);
@@ -37,15 +41,14 @@ namespace Hadamard.Common
         {
             get
             {
-                return _commandProcessors == null ?
-                    new Dictionary<string, CommandProcessor>
+                return new Dictionary<string, CommandProcessor>
                     {
                         {
                             "join", (command, parameters) => {
                                 if(parameters.Count < 1 )
                                     throw new ArgumentException("Not enough arguments");
                                 var channel = parameters[0].StartsWith("#") ? parameters[0] : $"#{parameters[0]}";
-                                _client.Channels.Join(channel);
+                                Client.Channels.Join(channel);
                             }
                         },
                         {
@@ -55,7 +58,7 @@ namespace Hadamard.Common
                             }
                         }
 
-                    } : _commandProcessors;
+                    } ?? _commandProcessors;
             }
         }
 
@@ -67,7 +70,7 @@ namespace Hadamard.Common
         protected override void OnClientRegistered(IrcClient client)
         {
             base.OnClientRegistered(client);
-            client.Channels.Join(_channel);
+            Client.Channels.Join(_channel);
         }
 
         protected override void OnChannelMessageReceived(IrcChannel channel, IrcMessageEventArgs e)
@@ -88,7 +91,7 @@ namespace Hadamard.Common
                         Longtitude = model[0].pos.First.d.ToString().Split('|')[1]
                     };
                     var replyMessage = $"Current position latitude: {satellite.Latitude} longtitude: {satellite.Longtitude} norad id: {satellite.NoradId}";
-                    _client.LocalUser.SendMessage(_channel, replyMessage);
+                    Client.LocalUser.SendMessage(ActiveChannel.Name, replyMessage);
                 }
             }
         }
