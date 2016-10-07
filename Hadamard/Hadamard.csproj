@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewMain.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -62,6 +63,10 @@
     <ProjectReference Include="..\Hadamard.Common\Hadamard.Common.csproj">
       <Project>{961ec1bf-1b95-451e-8fa5-0c7ca317a5b8}</Project>
       <Name>Hadamard.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hadamard.Presentation\Hadamard.Presentation.csproj">
+      <Project>{4f2c0716-8dc1-417d-8f98-d1c7aad68911}</Project>
+      <Name>Hadamard.Presentation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,7 +12,9 @@ namespace Hadamard.Common
     public abstract class IrcBot
     {
         public abstract IrcRegistrationInfo RegistrationInfo { get; }
+
         protected abstract void InitializeCommandProcessors();
+        //protected abstract void InitializeChatCommandProcessors();
 
         protected virtual void OnClientConnected(IrcClient client) { }
         protected virtual void OnClientRegistered(IrcClient client) { }
@@ -100,17 +102,23 @@ namespace Hadamard.Common
                 if (line == null)
                     break;
                 if (line.Length == 0)
-                    continue;
-
-                var parts = line.Split(' ');
-                var command = parts[0].ToLower();
-                var parameters = parts.Skip(1).ToArray();
-
-                ReadCommand(command, parameters);
+                    continue;                
+                
+                ReadCommand(GetCommandKeyWord(line), GetCommandParameters(line));
             }
         }
 
-        private void ReadCommand(string command, string[] parameters)
+        protected string[] GetCommandParameters(string line)
+        {
+            return line.Split(' ').Skip(1).ToArray();
+        }
+
+        protected string GetCommandKeyWord(string line)
+        {
+            return line.Split(' ')[0].ToLower();
+        }
+
+        protected void ReadCommand(string command, string[] parameters)
         {
             CommandProcessor processor;
             if (_commandProcessors.TryGetValue(command, out processor))
@@ -126,6 +134,11 @@ namespace Hadamard.Common
             }
             else
                 Console.WriteLine($"+ Command '{command}' not recognized", command);
+        }
+
+        private void ReadChatCommand(IrcClient client, IIrcMessageSource source, IList<IIrcMessageTarget> targets, string command, string[] parameters)
+        {
+
         }
     }
 }

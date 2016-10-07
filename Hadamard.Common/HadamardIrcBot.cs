@@ -42,23 +42,42 @@ namespace Hadamard.Common
             get
             {
                 return new Dictionary<string, CommandProcessor>
+                {
                     {
+                        "join", (command, parameters) => {
+                            if(parameters.Count < 1 )
+                                throw new ArgumentException("Not enough arguments");
+                            var channel = parameters[0].StartsWith("#") ? parameters[0] : $"#{parameters[0]}";
+                            Client.Channels.Join(channel);
+                        }
+                    },
+                    {
+                        "quit", (command, parameters) =>
                         {
-                            "join", (command, parameters) => {
-                                if(parameters.Count < 1 )
-                                    throw new ArgumentException("Not enough arguments");
-                                var channel = parameters[0].StartsWith("#") ? parameters[0] : $"#{parameters[0]}";
-                                Client.Channels.Join(channel);
-                            }
-                        },
+                            Quit();
+                        }
+                    },
+                    {
+                        "satinfo", (command, parameters) =>
                         {
-                            "quit", (command, parameters) =>
+                            using (var webClient = new WebClient())
                             {
-                                Quit();
+                                var downloadString = $"http://www.n2yo.com/sat/instant-tracking.php?s={parameters[0] ?? "25338"}&hlat=70.07436&hlng=29.74872&d=300&r=139203158747.09302&tz=GMT+02:00&O=n2yocom&rnd_str=5b53a06e197ed03f2075e8c1d85fa6d6";
+                                var response = webClient.DownloadString(downloadString);
+                                dynamic model = JsonConvert.DeserializeObject(response);
+
+                                var satellite = new
+                                {
+                                    NoradId = model[0].id,
+                                    Latitude = model[0].pos.First.d.ToString().Split('|')[0],
+                                    Longtitude = model[0].pos.First.d.ToString().Split('|')[1]
+                                };
+                                var replyMessage = $"Current position latitude: {satellite.Latitude} longtitude: {satellite.Longtitude} norad id: {satellite.NoradId}";
+                                Client.LocalUser.SendMessage(ActiveChannel.Name, replyMessage);
                             }
                         }
-
-                    } ?? _commandProcessors;
+                    }
+                } ?? _commandProcessors;
             }
         }
 
@@ -67,44 +86,20 @@ namespace Hadamard.Common
 
         }
 
-        protected override void OnClientRegistered(IrcClient client)
+/*        protected override void OnClientRegistered(IrcClient client)
         {
             base.OnClientRegistered(client);
             Client.Channels.Join(_channel);
         }
-
+        */
         protected override void OnChannelMessageReceived(IrcChannel channel, IrcMessageEventArgs e)
         {
             base.OnChannelMessageReceived(channel, e);
 
-            if(e.Text.Equals("satinfo"))
-            {
-                using (var webClient = new WebClient())
-                {
-                    var response = webClient.DownloadString("http://www.n2yo.com/sat/instant-tracking.php?s=25338&hlat=70.07436&hlng=29.74872&d=300&r=139203158747.09302&tz=GMT+02:00&O=n2yocom&rnd_str=5b53a06e197ed03f2075e8c1d85fa6d6");
-                    dynamic model = JsonConvert.DeserializeObject(response);
+            var command = GetCommandKeyWord(e.Text);
+            var parameters = GetCommandParameters(e.Text);
 
-                    var satellite = new
-                    {
-                        NoradId = model[0].id,
-                        Latitude = model[0].pos.First.d.ToString().Split('|')[0],
-                        Longtitude = model[0].pos.First.d.ToString().Split('|')[1]
-                    };
-                    var replyMessage = $"Current position latitude: {satellite.Latitude} longtitude: {satellite.Longtitude} norad id: {satellite.NoradId}";
-                    Client.LocalUser.SendMessage(ActiveChannel.Name, replyMessage);
-                }
-            }
+            ReadCommand(command, parameters);
         }
     }
-
 }
-/*
-var test = responseModel[0].id;
-var pos = responseModel[0].pos;
-
-dynamic position = responseModel[0].pos;
-dynamic poss = position.First;
-
-var latitude = poss.d.ToString().Split('|')[0];
-var longtitude = poss.d.ToString().Split('|')[1];
-*/
