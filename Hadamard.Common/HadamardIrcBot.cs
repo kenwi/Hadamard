@@ -60,6 +60,12 @@ namespace Hadamard.Common
                     {
                         "satinfo", (command, parameters) =>
                         {
+                            var repository = new Model.SatelliteRepository();
+                            var satellite = repository.GetSatellite(int.Parse(parameters[0]));
+
+
+
+                            /*
                             using (var webClient = new WebClient())
                             {
                                 var downloadString = $"http://www.n2yo.com/sat/instant-tracking.php?s={parameters[0] ?? "25338"}&hlat=70.07436&hlng=29.74872&d=300&r=139203158747.09302&tz=GMT+02:00&O=n2yocom&rnd_str=5b53a06e197ed03f2075e8c1d85fa6d6";
@@ -70,11 +76,13 @@ namespace Hadamard.Common
                                 {
                                     NoradId = model[0].id,
                                     Latitude = model[0].pos.First.d.ToString().Split('|')[0],
-                                    Longtitude = model[0].pos.First.d.ToString().Split('|')[1]
+                                    Longtitude = model[0].pos.First.d.ToString().Split('|')[1],
+                                    Azimuth = model[0].pos.First.d.ToString().Split('|')[2],
+                                    Elevation = model[0].pos.First.d.ToString().Split('|')[3]
                                 };
                                 var replyMessage = $"Current position latitude: {satellite.Latitude} longtitude: {satellite.Longtitude} norad id: {satellite.NoradId}";
                                 Client.LocalUser.SendMessage(ActiveChannel.Name, replyMessage);
-                            }
+                            }*/
                         }
                     }
                 } ?? _commandProcessors;
