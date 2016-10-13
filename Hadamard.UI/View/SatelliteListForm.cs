@@ -98,5 +98,10 @@ namespace Hadamard.UI.View
                 throw new NotImplementedException();
             }
         }
+
+        public void Run()
+        {
+            Application.Run(this);
+        }
     }
 }

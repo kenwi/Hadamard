@@ -20,5 +20,7 @@ namespace Hadamard.UI.View
         string Latitude { get; set; }
         string Longtitude { get; set; }
         string Elevation { get; set; }
+
+        void Run();
     }
 }

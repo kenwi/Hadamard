@@ -15,11 +15,6 @@ namespace Hadamard.UI.View
 {
     public partial class SatelliteForm : Form, ISatelliteView
     {
-        public SatelliteForm()
-        {
-            InitializeComponent();
-        }
-
         public ISatellitePresenter Presenter { private get; set; }
 
         public IList<Satellite> SatelliteList
@@ -58,6 +53,11 @@ namespace Hadamard.UI.View
             set { this.elevationTextBox.Text = value; }
         }
 
+        public SatelliteForm()
+        {
+            InitializeComponent();
+        }
+
         private void addButton_Click(object sender, EventArgs e)
         {
             var satellite = new Satellite(Id);
@@ -72,6 +72,11 @@ namespace Hadamard.UI.View
         private void button1_Click(object sender, EventArgs e)
         {
             Presenter.ShowSatelliteList();
+        }
+
+        public void Run()
+        {
+            Application.Run(this);
         }
     }
 }

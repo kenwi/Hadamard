@@ -25,9 +25,8 @@ namespace Hadamard.UI
 
             ISatelliteRepository repository = new SatelliteRepository();
             var view = new SatelliteForm();
-            var presenter = new SatellitePresenter(view, repository);
-
-            Application.Run(view);
+            new SatellitePresenter(view, repository);
+            view.Run();
         }
     }
 }
