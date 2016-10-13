@@ -23,6 +23,15 @@ namespace Hadamard.UI.Presenter
             UpdateSatelliteListView();
         }
 
+        public void ShowSatelliteList()
+        {
+            var satellites = new SatelliteListForm();
+            var presenter = new SatellitePresenter(satellites, repository);
+
+            satellites.SatelliteList = repository.GetAllSatellites().ToList();
+            satellites.Show();
+        }
+
         public void UpdateSatelliteListView()
         {
             repository.Update();

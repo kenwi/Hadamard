@@ -41,6 +41,7 @@
             this.addButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.satelliteListBox = new System.Windows.Forms.ListBox();
+            this.button1 = new System.Windows.Forms.Button();
             groupBox1 = new System.Windows.Forms.GroupBox();
             groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -50,6 +51,7 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(this.tableLayoutPanel2);
+            groupBox1.Controls.Add(this.button1);
             groupBox1.Controls.Add(this.addButton);
             groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             groupBox1.Location = new System.Drawing.Point(224, 2);
@@ -207,6 +209,18 @@
             this.satelliteListBox.TabIndex = 0;
             this.satelliteListBox.SelectedIndexChanged += new System.EventHandler(this.satelliteListBox_SelectedIndexChanged);
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(210, 233);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(56, 19);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Show";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // SatelliteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -237,5 +251,6 @@
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.TextBox elevationTextBox;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button1;
     }
 }

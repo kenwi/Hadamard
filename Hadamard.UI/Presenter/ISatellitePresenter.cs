@@ -12,5 +12,6 @@ namespace Hadamard.UI.Presenter
         void UpdateSatelliteListView();
         void AddSatellite(Satellite satellite);
         void UpdateSatelliteListView(int selectedIndex);
+        void ShowSatelliteList();
     }
 }
