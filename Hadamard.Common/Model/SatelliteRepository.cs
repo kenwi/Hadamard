@@ -15,9 +15,24 @@ namespace Hadamard.Common.Model
             _satellites = new Lazy<List<Satellite>>();
         }
 
+        public void Add(Satellite satellite)
+        {
+            _satellites.Value.Add(satellite);
+        }
+
+        public IEnumerable<Satellite> GetAllSatellites()
+        {
+            return _satellites.Value;
+        }
+
         public Satellite GetSatellite(int id)
         {
             return _satellites.Value[id];
+        }
+
+        public void Update()
+        {
+            _satellites.Value.ForEach( s => s.Refresh() );
         }
     }
 }

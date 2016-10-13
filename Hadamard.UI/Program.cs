@@ -4,6 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+using Hadamard.UI.View;
+using Hadamard.Common;
+using Hadamard.Common.Model;
+using Hadamard.UI.Presenter;
+
 namespace Hadamard.UI
 {
     static class Program
@@ -16,7 +22,12 @@ namespace Hadamard.UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ViewMain());
+
+            ISatelliteRepository repository = new SatelliteRepository();
+            var view = new SatelliteForm();
+            var presenter = new SatellitePresenter(view, repository);
+
+            Application.Run(view);
         }
     }
 }

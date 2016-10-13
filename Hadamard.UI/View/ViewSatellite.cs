@@ -11,11 +11,13 @@ using System.Windows.Forms;
 using Hadamard.Common;
 using Hadamard.Common.Model;
 
-namespace Hadamard.UI
+namespace Hadamard.UI.View
 {
-    public partial class ViewMain : Form
+    public partial class ViewSatellite : Form
     {
-        public ViewMain()
+        public Satellite Satellite { get; set; }
+
+        public ViewSatellite()
         {
             InitializeComponent();
         }

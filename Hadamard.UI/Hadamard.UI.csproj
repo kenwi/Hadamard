@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Presenter\ISatellitePresenter.cs" />
+    <Compile Include="Presenter\SatellitePresenter.cs" />
     <Compile Include="ViewMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +56,19 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\ISatelliteView.cs" />
+    <Compile Include="View\SatelliteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SatelliteForm.Designer.cs">
+      <DependentUpon>SatelliteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewSatellite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ViewSatellite.Designer.cs">
+      <DependentUpon>ViewSatellite.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -65,6 +80,12 @@
     </Compile>
     <EmbeddedResource Include="ViewMain.resx">
       <DependentUpon>ViewMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SatelliteForm.resx">
+      <DependentUpon>SatelliteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ViewSatellite.resx">
+      <DependentUpon>ViewSatellite.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -78,6 +99,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hadamard.Common\Hadamard.Common.csproj">
+      <Project>{961ec1bf-1b95-451e-8fa5-0c7ca317a5b8}</Project>
+      <Name>Hadamard.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

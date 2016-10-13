@@ -11,13 +11,15 @@ namespace Hadamard.Common.Model
     public class Satellite
     {
         private int _id;
-        private int _latitude, _longtitude, _azimuth, _elevation;
+        private string _latitude, _longtitude, _azimuth, _elevation;
 
         public int Id => _id;
-        public float Latitude => _latitude;
-        public float Longtitude => _longtitude;
-        public float Azimuth => _azimuth;
-        public float Elevation => _elevation;
+        public string Latitude => _latitude;
+        public string Longtitude => _longtitude;
+        public string Azimuth => _azimuth;
+        public string Elevation => _elevation;
+
+        public Satellite() { }
 
         public Satellite(int id)
         {
@@ -27,7 +29,7 @@ namespace Hadamard.Common.Model
         private static Satellite GetSatelliteFromId(int id)
         {
             var sat = new Satellite(id);
-            sat.Refresh();
+            //sat.Refresh();
 
             return sat;
         }

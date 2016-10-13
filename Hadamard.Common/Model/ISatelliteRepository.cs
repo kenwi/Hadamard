@@ -9,5 +9,8 @@ namespace Hadamard.Common.Model
     public interface ISatelliteRepository
     {
         Satellite GetSatellite(int id);
+        void Add(Satellite satellite);
+        void Update();
+        IEnumerable<Satellite> GetAllSatellites();
     }
 }
