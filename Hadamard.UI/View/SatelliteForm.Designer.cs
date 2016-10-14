@@ -135,9 +135,9 @@
             this.label1.Location = new System.Drawing.Point(4, 54);
             this.label1.Margin = new System.Windows.Forms.Padding(4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Longtitude:";
+            this.label1.Text = "Longitude:";
             // 
             // label2
             // 

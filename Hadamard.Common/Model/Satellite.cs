@@ -15,7 +15,7 @@ namespace Hadamard.Common.Model
 
         public int Id => _id;
         public string Latitude => _latitude;
-        public string Longtitude => _longtitude;
+        public string Longitude => _longtitude;
         public string Azimuth => _azimuth;
         public string Elevation => _elevation;
 

@@ -19,35 +19,55 @@ namespace Hadamard.UI.View
         {
             InitializeComponent();
 
-            worldMap.MouseHover += WorldMap_MouseHover;
-        }
+            worldMap.MouseMove += (s, e) => DrawOverlay();
+            worldMap.Resize += (s, e) => DrawOverlay();
 
-        private void WorldMap_MouseHover(object sender, EventArgs e)
-        {
-            
         }
-
+        
         public void Run()
         {
-            Application.Run(this);
+
         }
 
-        private void worldMap_MouseMove(object sender, MouseEventArgs e)
+        private void DrawOverlay()
         {
-            var latitude = 70.37;
-            var longtitude = 31.08;
-            var mapWidth = worldMap.Width;
-            var mapHeight = worldMap.Height;
+            var width = worldMap.ClientRectangle.Width;
+            var height = worldMap.ClientRectangle.Height;
 
-            var x = (longtitude + 180) * (mapWidth / 360);
-            var latRad = latitude * Math.PI / 180;
-            var mercN = Math.Log(Math.Tan((Math.PI / 4) + (latRad / 2)));
-            var y = (mapHeight / 2) - (mapWidth * mercN / (2 * Math.PI));
+            var centerX = width / 2;
+            var centerY = height / 2;
 
             var graphics = worldMap.CreateGraphics();
-            graphics.DrawRectangle(new Pen(Color.Red), (float)(x-2.5), (float)(y-2.5), 5, 5);
+            graphics.DrawRectangle(new Pen(Color.Red), (float)(centerX - 2.5), (float)(centerY - 2.5), 5, 5);
 
-            toolStripStatusLabel1.Text = $"X: {e.X} Y: {e.Y} x: {x} y: {y}";
+            var latitude = 70;
+            var longitude = 30;
+
+            var x = (longitude + 180) * (width / 360);
+            var latRad = latitude * Math.PI / 180;
+            var mercN = Math.Log(Math.Tan((Math.PI / 4) + (latRad / 2)));
+            var y = (height / 2) - (width * mercN / (2 * Math.PI));
+            graphics.DrawRectangle(new Pen(Color.Red), (float)(x - 2.5), (float)(y - 2.5), 5, 5);
+
+            /*
+            for (int i = -80; i < 80; i += 10)
+            {
+                for (int j = -80; j < 80; j += 10)
+                {
+                    var latitude = 0;
+                    var longtitude = 0;
+                    var mapWidth = worldMap.ClientRectangle.Width;
+                    var mapHeight = worldMap.ClientRectangle.Height;
+
+                    var x = (longtitude + 180) * (mapWidth / 360);
+                    var latRad = latitude * Math.PI / 180;
+                    var mercN = Math.Log(Math.Tan((Math.PI / 4) + (latRad / 2)));
+                    var y = (mapHeight / 2) - (mapWidth * mercN / (2 * Math.PI));
+
+                    var graphics = worldMap.CreateGraphics();
+                    graphics.DrawRectangle(new Pen(Color.Red), (float)(x - 2.5), (float)(y - 2.5), 5, 5);
+                }
+            }*/
         }
     }
 }

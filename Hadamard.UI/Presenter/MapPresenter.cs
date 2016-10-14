@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hadamard.UI.View;
+using Hadamard.Common.Model;
 
 namespace Hadamard.UI.Presenter
 {
@@ -25,6 +26,11 @@ namespace Hadamard.UI.Presenter
         public void Run()
         {
             _view.Run();
+
+            ISatelliteRepository repository = new SatelliteRepository();
+            var view = new SatelliteForm();
+            var presenter = new SatellitePresenter(view, repository);
+            presenter.Run();
         }
     }
 }
