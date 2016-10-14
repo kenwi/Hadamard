@@ -21,19 +21,44 @@ namespace Hadamard.UI.View
 
             worldMap.MouseMove += (s, e) => DrawOverlay();
             worldMap.Resize += (s, e) => DrawOverlay();
-
+            DrawOverlay();
         }
         
         public void Run()
         {
+            Application.Run(this);
+        }
 
+        private double projDegToRad(float deg)
+        {
+            return (deg / 180.0 * Math.PI);
+        }
+
+        private double projRadToDeg(float rad)
+        {
+            return (rad / Math.PI * 180.0);
         }
 
         private void DrawOverlay()
         {
             var width = worldMap.ClientRectangle.Width;
             var height = worldMap.ClientRectangle.Height;
+            /*
+            var lat = 70;
+            var lon = 30;
+            var lon0 = 0;
 
+            var sm_a = 6378137.0;
+            var sm_b = 6356752.314;
+
+            var latitude = projDegToRad(lat);
+            var longitude = projDegToRad(lon);
+
+                        
+            var x = sm_a * (lon - lon0);
+            var y = sm_a * Math.Log(Math.Sin(lat) + 1) / Math.Cos(lat);
+            */
+            /*
             var centerX = width / 2;
             var centerY = height / 2;
 
@@ -48,16 +73,16 @@ namespace Hadamard.UI.View
             var mercN = Math.Log(Math.Tan((Math.PI / 4) + (latRad / 2)));
             var y = (height / 2) - (width * mercN / (2 * Math.PI));
             graphics.DrawRectangle(new Pen(Color.Red), (float)(x - 2.5), (float)(y - 2.5), 5, 5);
-
-            /*
-            for (int i = -80; i < 80; i += 10)
+            */
+            
+            //for (int i = -80; i < 80; i += 10)
             {
-                for (int j = -80; j < 80; j += 10)
+              //  for (int j = -80; j < 80; j += 10)
                 {
                     var latitude = 0;
                     var longtitude = 0;
-                    var mapWidth = worldMap.ClientRectangle.Width;
-                    var mapHeight = worldMap.ClientRectangle.Height;
+                    var mapWidth = worldMap.Width;
+                    var mapHeight = worldMap.Height;
 
                     var x = (longtitude + 180) * (mapWidth / 360);
                     var latRad = latitude * Math.PI / 180;
@@ -67,7 +92,7 @@ namespace Hadamard.UI.View
                     var graphics = worldMap.CreateGraphics();
                     graphics.DrawRectangle(new Pen(Color.Red), (float)(x - 2.5), (float)(y - 2.5), 5, 5);
                 }
-            }*/
+            }
         }
     }
 }
