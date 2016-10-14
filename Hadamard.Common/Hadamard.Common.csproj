@@ -57,6 +57,8 @@
     <Compile Include="ConsoleIOHandler.cs" />
     <Compile Include="IrcBot.cs" />
     <Compile Include="IrcIOHandler.cs" />
+    <Compile Include="Model\GroundStation.cs" />
+    <Compile Include="Model\IGroundStationRepository.cs" />
     <Compile Include="Model\ISatelliteRepository.cs" />
     <Compile Include="Model\Satellite.cs" />
     <Compile Include="Model\SatelliteRepository.cs" />

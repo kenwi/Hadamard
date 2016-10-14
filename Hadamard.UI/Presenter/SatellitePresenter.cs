@@ -19,8 +19,15 @@ namespace Hadamard.UI.Presenter
 
         public void AddSatellite(Satellite satellite)
         {
+            satellite.Refresh();
             repository.Add(satellite);
+            
             UpdateSatelliteListView();
+        }
+
+        public void Run()
+        {
+            view.Run();
         }
 
         public void ShowSatelliteList()
@@ -34,8 +41,6 @@ namespace Hadamard.UI.Presenter
 
         public void UpdateSatelliteListView()
         {
-            repository.Update();
-
             var satellites = repository.GetAllSatellites();
             int selectedSatellite = view.SelectedSatellite >= 0 ? view.SelectedSatellite : 0;
 

@@ -47,7 +47,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Presenter\ISatellitePresenter.cs" />
+    <Compile Include="Presenter\MapPresenter.cs" />
     <Compile Include="Presenter\SatellitePresenter.cs" />
+    <Compile Include="Presenter\IMapPresenter.cs" />
+    <Compile Include="View\IMapView.cs" />
+    <Compile Include="View\MapView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MapView.Designer.cs">
+      <DependentUpon>MapView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ViewMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +87,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\MapView.resx">
+      <DependentUpon>MapView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\ViewMain.resx">
       <DependentUpon>ViewMain.cs</DependentUpon>
     </EmbeddedResource>
