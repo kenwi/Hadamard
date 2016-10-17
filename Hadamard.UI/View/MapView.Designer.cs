@@ -29,33 +29,22 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MapView));
-            this.worldMap = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.worldMap)).BeginInit();
+            this.worldMap = new System.Windows.Forms.PictureBox();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.worldMap)).BeginInit();
             this.SuspendLayout();
-            // 
-            // worldMap
-            // 
-            this.worldMap.Image = ((System.Drawing.Image)(resources.GetObject("worldMap.Image")));
-            this.worldMap.Location = new System.Drawing.Point(0, 0);
-            this.worldMap.Margin = new System.Windows.Forms.Padding(0);
-            this.worldMap.Name = "worldMap";
-            this.worldMap.Size = new System.Drawing.Size(2058, 1746);
-            this.worldMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.worldMap.TabIndex = 0;
-            this.worldMap.TabStop = false;
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 570);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 799);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(673, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1127, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -71,33 +60,41 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(673, 570);
+            this.panel1.Size = new System.Drawing.Size(1127, 799);
             this.panel1.TabIndex = 2;
+            // 
+            // worldMap
+            // 
+            this.worldMap.Image = ((System.Drawing.Image)(resources.GetObject("worldMap.Image")));
+            this.worldMap.Location = new System.Drawing.Point(0, 0);
+            this.worldMap.Margin = new System.Windows.Forms.Padding(0);
+            this.worldMap.Name = "worldMap";
+            this.worldMap.Size = new System.Drawing.Size(3200, 3200);
+            this.worldMap.TabIndex = 0;
+            this.worldMap.TabStop = false;
             // 
             // MapView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(673, 592);
+            this.ClientSize = new System.Drawing.Size(1127, 821);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Name = "MapView";
             this.Text = "MapView";
-            ((System.ComponentModel.ISupportInitialize)(this.worldMap)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.worldMap)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox worldMap;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox worldMap;
     }
 }

@@ -29,6 +29,7 @@ namespace Hadamard.UI
             new MapView().Show();
             presenter.Run();
             */
+
             var view = new MapView();
             var presenter = new MapPresenter(view);
             view.Run();
