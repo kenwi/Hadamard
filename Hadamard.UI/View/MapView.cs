@@ -75,12 +75,12 @@ namespace Hadamard.UI.View
             graphics.DrawRectangle(new Pen(Color.Red), (float)(x - 2.5), (float)(y - 2.5), 5, 5);
             */
             
-            //for (int i = -80; i < 80; i += 10)
+            for (int i = -89; i < 89; i += 10)
             {
-              //  for (int j = -80; j < 80; j += 10)
+                for (int j = -89; j < 89; j += 10)
                 {
-                    var latitude = 0;
-                    var longtitude = 0;
+                    var latitude = i;
+                    var longtitude = j;
                     var mapWidth = worldMap.Width;
                     var mapHeight = worldMap.Height;
 
