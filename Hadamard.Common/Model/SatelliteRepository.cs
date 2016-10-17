@@ -13,6 +13,9 @@ namespace Hadamard.Common.Model
         public SatelliteRepository()
         {
             _satellites = new Lazy<List<Satellite>>();
+
+            new int[] { 25544, 36516, 33591, 29155, 28654, 25338 }.ToList().ForEach(id => this.Add(new Satellite(id)));
+            GetAllSatellites().ToList().ForEach(satellite => satellite.Refresh());
         }
 
         public void Add(Satellite satellite)

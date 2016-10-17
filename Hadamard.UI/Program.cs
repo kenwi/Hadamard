@@ -22,17 +22,16 @@ namespace Hadamard.UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            /*
+            
             ISatelliteRepository repository = new SatelliteRepository();
             var view = new SatelliteForm();
             var presenter = new SatellitePresenter(view, repository);
             new MapView().Show();
             presenter.Run();
-            */
-
+            /*
             var view = new MapView();
             var presenter = new MapPresenter(view);
-            view.Run();
+            view.Run();*/
         }
     }
 }

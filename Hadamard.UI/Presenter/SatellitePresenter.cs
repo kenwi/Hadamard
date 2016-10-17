@@ -15,6 +15,7 @@ namespace Hadamard.UI.Presenter
             this.view = view;
             view.Presenter = this;
             this.repository = repository;
+            UpdateSatelliteListView();
         }
 
         public void AddSatellite(Satellite satellite)

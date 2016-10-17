@@ -86,16 +86,17 @@ namespace Hadamard.UI.View
             }
         }
 
+        private int _selectedSatellite;
         public int SelectedSatellite
         {
             get
             {
-                throw new NotImplementedException();
+                return _selectedSatellite;
             }
 
             set
             {
-                throw new NotImplementedException();
+                _selectedSatellite = value;
             }
         }
 
