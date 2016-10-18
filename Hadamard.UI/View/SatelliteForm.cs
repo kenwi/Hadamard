@@ -55,7 +55,7 @@ namespace Hadamard.UI.View
 
         public SatelliteForm()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         private void addButton_Click(object sender, EventArgs e)

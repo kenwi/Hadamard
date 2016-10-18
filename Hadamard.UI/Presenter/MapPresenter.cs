@@ -11,6 +11,8 @@ namespace Hadamard.UI.Presenter
     public class MapPresenter : IMapPresenter
     {
         private IMapView _view;
+        private ISatelliteRepository repository;
+
         public IMapView View
         {
             get { return _view;}
@@ -23,14 +25,19 @@ namespace Hadamard.UI.Presenter
             view.Presenter = this;
         }
 
+        public MapPresenter(IMapView view, ISatelliteRepository repository) : this(view)
+        {
+            this.repository = repository;
+        }
+
         public void Run()
         {
             _view.Run();
-
+            /*
             ISatelliteRepository repository = new SatelliteRepository();
             var view = new SatelliteForm();
             var presenter = new SatellitePresenter(view, repository);
-            presenter.Run();
+            presenter.Run();*/
         }
     }
 }

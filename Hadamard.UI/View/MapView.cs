@@ -8,12 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Hadamard.UI.Presenter;
+using Hadamard.Common.Model;
 
 namespace Hadamard.UI.View
 {
     public partial class MapView : Form, IMapView
     {
+        private Point _mouseClickMove;
+        private IList<Satellite> _satelliteList;
+
         public IMapPresenter Presenter { get; set; }
+
+        public IList<Satellite> SatelliteList
+        {
+            get { return _satelliteList; }
+            set { _satelliteList= value; }
+        }
 
         public MapView()
         {
@@ -21,6 +31,19 @@ namespace Hadamard.UI.View
 
             worldMap.MouseMove += (s, e) => DrawOverlay();
             worldMap.Resize += (s, e) => DrawOverlay();
+            worldMap.MouseDown += (s, e) =>
+            {
+                if (e.Button == MouseButtons.Left)
+                    _mouseClickMove = e.Location;
+            };
+            worldMap.MouseMove += (s, e) =>
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    Point dt = new Point(e.Location.X - _mouseClickMove.X, e.Location.Y - _mouseClickMove.Y);
+                    panel1.AutoScrollPosition = new Point(-panel1.AutoScrollPosition.X - dt.X, -panel1.AutoScrollPosition.Y - dt.Y);
+                }
+            };
         }
         
         public void Run()
