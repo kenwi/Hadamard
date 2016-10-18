@@ -76,7 +76,8 @@ namespace Hadamard.UI.View
 
         public void Run()
         {
-            Application.Run(this);
+            //Application.Run(this);
+            Show();
         }
     }
 }

@@ -69,7 +69,7 @@
             this.worldMap.Location = new System.Drawing.Point(0, 0);
             this.worldMap.Margin = new System.Windows.Forms.Padding(0);
             this.worldMap.Name = "worldMap";
-            this.worldMap.Size = new System.Drawing.Size(3200, 3200);
+            this.worldMap.Size = new System.Drawing.Size(2586, 2715);
             this.worldMap.TabIndex = 0;
             this.worldMap.TabStop = false;
             // 

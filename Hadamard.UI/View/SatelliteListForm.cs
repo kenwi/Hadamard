@@ -17,6 +17,13 @@ namespace Hadamard.UI.View
         public SatelliteListForm()
         {
             InitializeComponent();
+
+
+        }
+
+        private void Sat_OnValuesUpdated(Satellite satellite)
+        {
+            throw new NotImplementedException();
         }
 
         public string Elevation
@@ -102,7 +109,12 @@ namespace Hadamard.UI.View
 
         public void Run()
         {
-            Application.Run(this);
+            Show();
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
