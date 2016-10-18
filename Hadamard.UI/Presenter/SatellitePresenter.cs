@@ -52,7 +52,7 @@ namespace Hadamard.UI.Presenter
 
         public void UpdateSatelliteListView(int selectedIndex)
         {
-            var satellite = repository.GetSatellite(selectedIndex);
+            var satellite = repository.GetSatelliteByIndex(selectedIndex);
             satellite.Refresh();
 
             view.Id = satellite.Id;

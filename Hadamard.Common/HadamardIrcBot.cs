@@ -61,7 +61,7 @@ namespace Hadamard.Common
                         "satinfo", (command, parameters) =>
                         {
                             var repository = new Model.SatelliteRepository();
-                            var satellite = repository.GetSatellite(int.Parse(parameters[0]));
+                            var satellite = repository.GetSatelliteByIndex(int.Parse(parameters[0]));
 
 
 

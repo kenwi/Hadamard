@@ -19,6 +19,8 @@ namespace Hadamard.Common.Model
         public string Azimuth => _azimuth;
         public string Elevation => _elevation;
 
+        public event EventHandler<OnSatelliteValuesUpdatedArgs> OnSatelliteValuesUpdated;
+
         public Satellite() { }
 
         public Satellite(int id)
@@ -34,20 +36,29 @@ namespace Hadamard.Common.Model
             return sat;
         }
 
+        public void Update()
+        {
+            Refresh();
+            OnSatelliteValuesUpdated(this, new OnSatelliteValuesUpdatedArgs(this));
+        }
+
         public void Refresh()
         {
-            using (var webClient = new WebClient())
+            Task.Run(() =>
             {
-                var downloadString = $"http://www.n2yo.com/sat/instant-tracking.php?s={Id}&hlat=70.07436&hlng=29.74872&d=300&r=139203158747.09302&tz=GMT+02:00&O=n2yocom&rnd_str=5b53a06e197ed03f2075e8c1d85fa6d6";
-                var response = webClient.DownloadString(downloadString);
-                dynamic model = JsonConvert.DeserializeObject(response);
-                
-                _id = model[0].id;
-                _latitude = model[0].pos.First.d.ToString().Split('|')[0];
-                _longtitude = model[0].pos.First.d.ToString().Split('|')[1];
-                _azimuth = model[0].pos.First.d.ToString().Split('|')[2];
-                _elevation = model[0].pos.First.d.ToString().Split('|')[3];
-            }
+                using (var webClient = new WebClient())
+                {
+                    var downloadString = $"http://www.n2yo.com/sat/instant-tracking.php?s={Id}&hlat=70.07436&hlng=29.74872&d=300&r=139203158747.09302&tz=GMT+02:00&O=n2yocom&rnd_str=5b53a06e197ed03f2075e8c1d85fa6d6";
+                    var response = webClient.DownloadString(downloadString);
+                    dynamic model = JsonConvert.DeserializeObject(response);
+
+                    _id = model[0].id;
+                    _latitude = model[0].pos.First.d.ToString().Split('|')[0];
+                    _longtitude = model[0].pos.First.d.ToString().Split('|')[1];
+                    _azimuth = model[0].pos.First.d.ToString().Split('|')[2];
+                    _elevation = model[0].pos.First.d.ToString().Split('|')[3];
+                }
+            }).Wait();
         }
     }
 }
