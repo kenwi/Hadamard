@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hadamard.UI", "Hadamard.UI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpKata.WinGui", "..\..\..\..\Source\Repos\SharpKata\SharpKata.WinGui\SharpKata.WinGui.csproj", "{8F2ECBE4-92A5-43E2-A1E3-84DAFFAC7D2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hadamard.Tests", "Hadamard.Tests\Hadamard.Tests.csproj", "{5EDF4F83-5D8B-49FB-BB25-66CEA1328908}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hadamard.Console", "Hadamard.Console\Hadamard.Console.csproj", "{F659A4C4-9973-4197-9594-A348CAF5D7D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{8F2ECBE4-92A5-43E2-A1E3-84DAFFAC7D2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F2ECBE4-92A5-43E2-A1E3-84DAFFAC7D2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F2ECBE4-92A5-43E2-A1E3-84DAFFAC7D2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EDF4F83-5D8B-49FB-BB25-66CEA1328908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EDF4F83-5D8B-49FB-BB25-66CEA1328908}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EDF4F83-5D8B-49FB-BB25-66CEA1328908}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EDF4F83-5D8B-49FB-BB25-66CEA1328908}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F659A4C4-9973-4197-9594-A348CAF5D7D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F659A4C4-9973-4197-9594-A348CAF5D7D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F659A4C4-9973-4197-9594-A348CAF5D7D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F659A4C4-9973-4197-9594-A348CAF5D7D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

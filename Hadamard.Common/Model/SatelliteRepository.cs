@@ -32,14 +32,15 @@ namespace Hadamard.Common.Model
 
     public class SatelliteRepository : ISatelliteRepository
     {
-        private  Lazy<List<Satellite>> _satellites;
+        private readonly Lazy<List<Satellite>> _satellites;
         public event EventHandler<OnSatelliteValuesUpdatedArgs> OnSatelliteValuesUpdated;
         public event EventHandler<OnSatelliteAddedArgs> OnSatelliteAdded;
+        public int Count => _satellites.Value.Count;
 
         public SatelliteRepository()
         {
             _satellites = new Lazy<List<Satellite>>();
-            createDefaultTrackedSatellites();
+            //createDefaultTrackedSatellites();
         }
 
         private void createDefaultTrackedSatellites()
@@ -52,9 +53,17 @@ namespace Hadamard.Common.Model
             if (GetSatelliteById(satellite.Id) != null)
                 throw new Exception($"Satellite with id '{satellite.Id}' is already tracked");
 
+            satellite.Index = Count;
             _satellites.Value.Add(satellite);
-            satellite.Refresh();
             OnSatelliteAdded?.Invoke(this, new OnSatelliteAddedArgs(satellite));
+        }
+
+        public void Add(Satellite satellite, bool updateData)
+        {
+            Add(satellite);
+
+            if(updateData)
+                satellite.Refresh();
         }
 
         public IEnumerable<Satellite> GetAllSatellites()
@@ -64,7 +73,12 @@ namespace Hadamard.Common.Model
 
         public Satellite GetSatelliteByIndex(int index)
         {
-            return _satellites?.Value[index];
+            return _satellites.Value.Find(satellite => satellite.Index == index);
+        }
+
+        public Satellite GetSatelliteById(int id)
+        {
+            return _satellites.Value.Find(satellite => satellite.Id == id);
         }
 
         public void UpdateAll()
@@ -74,15 +88,6 @@ namespace Hadamard.Common.Model
                 satellite.Refresh();
                 OnSatelliteValuesUpdated?.Invoke(this, new OnSatelliteValuesUpdatedArgs(satellite));
             });
-        }
-
-        public Satellite GetSatelliteById(int id)
-        {
-            var sat = _satellites?.Value?.Where(satellite => satellite?.Id == id);
-            if (sat.Count() == 0)
-                return null;
-
-            return sat.First();
         }
     }
 }

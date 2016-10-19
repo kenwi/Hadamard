@@ -56,9 +56,9 @@ namespace Hadamard.UI.Presenter
             satellite.Refresh();
 
             view.Id = satellite.Id;
-            view.Longtitude = satellite.Longitude;
-            view.Latitude = satellite.Latitude;
-            view.Elevation = satellite.Elevation;
+            view.Longtitude = satellite.Longitude.ToString();
+            view.Latitude = satellite.Latitude.ToString();
+            view.Elevation = satellite.Elevation.ToString();
         }
     }
 }

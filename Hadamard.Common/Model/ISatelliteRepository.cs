@@ -9,6 +9,7 @@ namespace Hadamard.Common.Model
     public interface ISatelliteRepository
     {
         void Add(Satellite satellite);
+        void Add(Satellite satellite, bool updateData);
         void UpdateAll();
 
         IEnumerable<Satellite> GetAllSatellites();
@@ -17,5 +18,6 @@ namespace Hadamard.Common.Model
 
         event EventHandler<OnSatelliteValuesUpdatedArgs> OnSatelliteValuesUpdated;
         event EventHandler<OnSatelliteAddedArgs> OnSatelliteAdded;
+        int Count { get; }
     }
 }
