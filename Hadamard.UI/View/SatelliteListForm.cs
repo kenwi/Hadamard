@@ -17,8 +17,6 @@ namespace Hadamard.UI.View
         public SatelliteListForm()
         {
             InitializeComponent();
-
-
         }
 
         private void Sat_OnValuesUpdated(Satellite satellite)
@@ -112,9 +110,14 @@ namespace Hadamard.UI.View
             Show();
         }
 
+        public void UpdateGUI()
+        {
+            Presenter.UpdateSatelliteListView();
+        }
+
         private void addButton_Click(object sender, EventArgs e)
         {
-            
+            Presenter.UpdateSatelliteListView();
         }
     }
 }

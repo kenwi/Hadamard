@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Hadamard.Common.Model
@@ -33,6 +34,8 @@ namespace Hadamard.Common.Model
     public class SatelliteRepository : ISatelliteRepository
     {
         private readonly Lazy<List<Satellite>> _satellites;
+        private readonly Task _satelliteUpdater;
+
         public event EventHandler<OnSatelliteValuesUpdatedArgs> OnSatelliteValuesUpdated;
         public event EventHandler<OnSatelliteAddedArgs> OnSatelliteAdded;
         public int Count => _satellites.Value.Count;
@@ -40,7 +43,26 @@ namespace Hadamard.Common.Model
         public SatelliteRepository()
         {
             _satellites = new Lazy<List<Satellite>>();
-            //createDefaultTrackedSatellites();
+            createDefaultTrackedSatellites();
+
+            _satelliteUpdater = Task.Run( () =>
+            {
+                while (true)
+                {
+                    Thread.Sleep(1000);
+                    if (Count <= 0)
+                        continue;
+
+                    var sats =
+                      GetAllSatellites()
+                          .Where(
+                              satellite =>
+                                  new TimeSpan(DateTime.Now.Ticks - satellite.LastUpdated.Ticks).TotalSeconds >
+                                  satellite.AutoUpdateInterval);
+
+                    sats.ToList().ForEach(satellite => satellite.Update());
+                }
+            });
         }
 
         private void createDefaultTrackedSatellites()
@@ -53,7 +75,10 @@ namespace Hadamard.Common.Model
             if (GetSatelliteById(satellite.Id) != null)
                 throw new Exception($"Satellite with id '{satellite.Id}' is already tracked");
 
+            satellite.AutoUpdateInterval = 10;
             satellite.Index = Count;
+            satellite.OnSatelliteValuesUpdated += (s, e) => OnSatelliteValuesUpdated?.Invoke(this, new OnSatelliteValuesUpdatedArgs(e.Satellite));
+
             _satellites.Value.Add(satellite);
             OnSatelliteAdded?.Invoke(this, new OnSatelliteAddedArgs(satellite));
         }

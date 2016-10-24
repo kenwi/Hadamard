@@ -25,6 +25,11 @@ namespace Hadamard.UI.View
             set { _satelliteList= value; }
         }
 
+        public void UpdateGUI()
+        {
+            drawSatellites();
+        }
+
         public MapView()
         {
             InitializeComponent();
@@ -57,6 +62,19 @@ namespace Hadamard.UI.View
         private double projRadToDeg(float rad)
         {
             return (rad / Math.PI * 180.0);
+        }
+
+        private void drawSatellites()
+        {
+            var graphics = worldMap.CreateGraphics();
+            var mapWidth = worldMap.Image.Height;
+            var mapHeight = worldMap.Image.Width;
+
+            SatelliteList?.ToList().ForEach(satellite =>
+            {
+                var merc = latLongToMerc(satellite.Latitude, satellite.Longitude, mapWidth, mapHeight);
+                drawSquare(merc);
+            });
         }
 
         private void drawLatitude()

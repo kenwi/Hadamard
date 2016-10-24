@@ -14,13 +14,16 @@ namespace Hadamard.Common.Model
         private int _id;
         private float _latitude, _longtitude, _azimuth, _elevation;
 
+        public int AutoUpdateInterval { get; set; }
+        public DateTime LastUpdated { get; set; }
+
         public int Id => _id;
         public int Index { get; set; }
         public float Latitude => _latitude;
         public float Longitude => _longtitude;
         public float Azimuth => _azimuth;
         public float Elevation => _elevation;
-
+        
         public event EventHandler<OnSatelliteValuesUpdatedArgs> OnSatelliteValuesUpdated;
 
         public Satellite() { }
@@ -58,6 +61,7 @@ namespace Hadamard.Common.Model
                 _longtitude = float.Parse(dataLine[1], CultureInfo.InvariantCulture.NumberFormat);
                 _azimuth = float.Parse(dataLine[2], CultureInfo.InvariantCulture.NumberFormat);
                 _elevation = float.Parse(dataLine[3], CultureInfo.InvariantCulture.NumberFormat);
+                LastUpdated = DateTime.Now;
             }
 
 

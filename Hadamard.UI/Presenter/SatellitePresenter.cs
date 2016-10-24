@@ -15,6 +15,10 @@ namespace Hadamard.UI.Presenter
             this.view = view;
             view.Presenter = this;
             this.repository = repository;
+            this.repository.OnSatelliteValuesUpdated += (s, e) => view.UpdateGUI();
+            
+            //this.repository.OnSatelliteValuesUpdated += (s, e) => 
+            //OnSatelliteAdded?.Invoke(this, new OnSatelliteAddedArgs(satellite));
 
             UpdateSatelliteListView();
         }

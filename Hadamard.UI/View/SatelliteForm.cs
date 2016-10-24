@@ -66,12 +66,17 @@ namespace Hadamard.UI.View
 
         private void satelliteListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Presenter.UpdateSatelliteListView(satelliteListBox.SelectedIndex);            
+            Presenter.UpdateSatelliteListView(satelliteListBox.SelectedIndex);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Presenter.ShowSatelliteList();
+        }
+
+        public void UpdateGUI()
+        {
+            Presenter.UpdateSatelliteListView(satelliteListBox.SelectedIndex);
         }
 
         public void Run()

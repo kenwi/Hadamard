@@ -6,5 +6,6 @@ namespace Hadamard.UI.View
     {
         IMapPresenter Presenter { get; set; }
         void Run();
+        void UpdateGUI();
     }
 }

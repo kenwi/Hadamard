@@ -28,17 +28,18 @@ namespace Hadamard.UI.Presenter
         public MapPresenter(IMapView view, ISatelliteRepository repository) : this(view)
         {
             this.repository = repository;
+            (view as MapView).SatelliteList = repository.GetAllSatellites().ToList();
+
             repository.UpdateAll();
+            repository.OnSatelliteValuesUpdated += (s, e) => _view.UpdateGUI();
         }
 
         public void Run()
         {
-            var sats = repository.GetAllSatellites();
-            
-            var view = new SatelliteListForm();
+            /*var view = new SatelliteListForm();
             var presenter = new SatellitePresenter(view, repository);
             presenter.Run();
-
+            */
             _view.Run();
         }
     }
