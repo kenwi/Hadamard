@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -13,8 +14,8 @@ namespace Hadamard.Common.Model
         private int _id;
         private float _latitude, _longtitude, _azimuth, _elevation;
 
-        public int Index { get; set; }
         public int Id => _id;
+        public int Index { get; set; }
         public float Latitude => _latitude;
         public float Longitude => _longtitude;
         public float Azimuth => _azimuth;
@@ -53,10 +54,10 @@ namespace Hadamard.Common.Model
                     throw new Exception($@"Could not find satellite with id '{_id}'");
 
                 var dataLine = model[0].pos.First.d.Value.ToString().Split('|');
-                _latitude = (float)dataLine[0].ToString();
-                _longtitude = float.Parse(model[0].pos.First.d.ToString().Split('|')[1]);
-                _azimuth = float.Parse(model[0].pos.First.d.ToString().Split('|')[2]);
-                _elevation = float.Parse(model[0].pos.First.d.ToString().Split('|')[3]);
+                _latitude = float.Parse(dataLine[0], CultureInfo.InvariantCulture.NumberFormat);
+                _longtitude = float.Parse(dataLine[1], CultureInfo.InvariantCulture.NumberFormat);
+                _azimuth = float.Parse(dataLine[2], CultureInfo.InvariantCulture.NumberFormat);
+                _elevation = float.Parse(dataLine[3], CultureInfo.InvariantCulture.NumberFormat);
             }
 
 

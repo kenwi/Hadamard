@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="RIDER_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$/../..">
+      <sourceFolder url="file://$MODULE_DIR$/../../Hadamard" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../Hadamard.Common" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../Hadamard.Console" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../Hadamard.Presentation" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../Hadamard.Tests" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../Hadamard.UI" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hadamard.Common/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hadamard.Common/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hadamard.Console/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hadamard.Console/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hadamard.Presentation/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hadamard.Presentation/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hadamard.Tests/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hadamard.Tests/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hadamard.UI/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hadamard.UI/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hadamard/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hadamard/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../packages" />
+    </content>
+    <content url="file://$USER_HOME$/Source/Repos/SharpKata/SharpKata.WinGui">
+      <sourceFolder url="file://$USER_HOME$/Source/Repos/SharpKata/SharpKata.WinGui" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/Source/Repos/SharpKata/SharpKata.WinGui/bin" />
+      <excludeFolder url="file://$USER_HOME$/Source/Repos/SharpKata/SharpKata.WinGui/obj" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

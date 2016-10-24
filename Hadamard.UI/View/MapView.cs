@@ -38,11 +38,9 @@ namespace Hadamard.UI.View
             };
             worldMap.MouseMove += (s, e) =>
             {
-                if (e.Button == MouseButtons.Left)
-                {
-                    Point dt = new Point(e.Location.X - _mouseClickMove.X, e.Location.Y - _mouseClickMove.Y);
-                    panel1.AutoScrollPosition = new Point(-panel1.AutoScrollPosition.X - dt.X, -panel1.AutoScrollPosition.Y - dt.Y);
-                }
+                if (e.Button != MouseButtons.Left) return;
+                Point dt = new Point(e.Location.X - _mouseClickMove.X, e.Location.Y - _mouseClickMove.Y);
+                panel1.AutoScrollPosition = new Point(-panel1.AutoScrollPosition.X - dt.X, -panel1.AutoScrollPosition.Y - dt.Y);
             };
         }
         

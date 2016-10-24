@@ -66,6 +66,7 @@ namespace Hadamard.Tests
             ISatelliteRepository repository = new SatelliteRepository();
             repository.Add(new Satellite(-1000));
             repository.Add(new Satellite(999999));
+            repository.UpdateAll();
         }
 
         [TestMethod]
