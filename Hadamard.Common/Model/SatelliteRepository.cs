@@ -75,7 +75,7 @@ namespace Hadamard.Common.Model
             if (GetSatelliteById(satellite.Id) != null)
                 throw new Exception($"Satellite with id '{satellite.Id}' is already tracked");
 
-            satellite.AutoUpdateInterval = 10;
+            satellite.AutoUpdateInterval = 5;
             satellite.Index = Count;
             satellite.OnSatelliteValuesUpdated += (s, e) => OnSatelliteValuesUpdated?.Invoke(this, new OnSatelliteValuesUpdatedArgs(e.Satellite));
 

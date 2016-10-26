@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -56,12 +57,21 @@ namespace Hadamard.Common.Model
                 if (model[0].pos.First == null)
                     throw new Exception($@"Could not find satellite with id '{_id}'");
 
-                var dataLine = model[0].pos.First.d.Value.ToString().Split('|');
-                _latitude = float.Parse(dataLine[0], CultureInfo.InvariantCulture.NumberFormat);
-                _longtitude = float.Parse(dataLine[1], CultureInfo.InvariantCulture.NumberFormat);
-                _azimuth = float.Parse(dataLine[2], CultureInfo.InvariantCulture.NumberFormat);
-                _elevation = float.Parse(dataLine[3], CultureInfo.InvariantCulture.NumberFormat);
-                LastUpdated = DateTime.Now;
+                try
+                {
+                    var dataLine = model[0].pos.First.d.Value.ToString().Split('|');
+                    _latitude = float.Parse(dataLine[0], CultureInfo.InvariantCulture.NumberFormat);
+                    _longtitude = float.Parse(dataLine[1], CultureInfo.InvariantCulture.NumberFormat);
+                    _azimuth = float.Parse(dataLine[2], CultureInfo.InvariantCulture.NumberFormat);
+                    _elevation = float.Parse(dataLine[3], CultureInfo.InvariantCulture.NumberFormat);
+                    LastUpdated = DateTime.Now;
+                }
+                catch (Exception e)
+                {
+                    Trace.WriteLine($"Satellite data conversion error: {e.Message}");
+                    //throw new Exception($"Satellite data conversion error: {e.Message}");
+                    return;
+                }
             }
 
 

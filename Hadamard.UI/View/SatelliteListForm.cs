@@ -12,7 +12,7 @@ using Hadamard.UI.Presenter;
 
 namespace Hadamard.UI.View
 {
-    public partial class SatelliteListForm : Form, ISatelliteView
+    public partial class SatelliteListForm : Form, ISatelliteView_old
     {
         public SatelliteListForm()
         {
