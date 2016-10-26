@@ -18,15 +18,31 @@ namespace Hadamard.UI.View
         public event EventHandler Initialize;
         public event EventHandler UpdateGui;
 
+        void ISatelliteView.Update()
+        {
+            dataGridView1.DataSource = SatelliteList;
+        }
+
         private readonly SatellitePresenter Presenter;
 
         public SatelliteView()
         {
-            Presenter = new SatellitePresenter(this, new SatelliteRepository());
             InitializeComponent();
+            Presenter = new SatellitePresenter(this, new SatelliteRepository());
             Initialize?.Invoke(this, new EventArgs());
 
             dataGridView1.DataSource = SatelliteList;
+            btnAddSatellite.Click += (s, e) => Presenter.AddSatellite(new Satellite(SatelliteID));
+        }
+
+        public int SatelliteID
+        {
+            get
+            {
+                var value = -1;
+                int.TryParse(txtSatelliteId.Text, out value);
+                return value;
+            }
         }
     }
 }
