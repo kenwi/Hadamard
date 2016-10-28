@@ -11,7 +11,7 @@ namespace Hadamard.Common
 {
     public abstract class IrcBot
     {
-        public abstract IrcRegistrationInfo RegistrationInfo { get; }
+        public abstract IrcRegistrationInfo RegistrationInfo { get; set; }
 
         protected abstract void InitializeCommandProcessors();
         //protected abstract void InitializeChatCommandProcessors();

@@ -36,6 +36,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IrcDotNet, Version=0.6.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\IrcDotNet.0.6.1\lib\net451\IrcDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,6 +65,14 @@
     <Compile Include="Presenter\SatellitePresenter_old.cs" />
     <Compile Include="Presenter\IMapPresenter.cs" />
     <Compile Include="Presenter\BasePresenter.cs" />
+    <Compile Include="View\ChatView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ChatView.Designer.cs">
+      <DependentUpon>ChatView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChatViewPresenter.cs" />
+    <Compile Include="View\IChatView.cs" />
     <Compile Include="View\IMapView.cs" />
     <Compile Include="View\ISatelliteView.cs" />
     <Compile Include="View\IView.cs" />
@@ -109,6 +121,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\ChatView.resx">
+      <DependentUpon>ChatView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\MapView.resx">
       <DependentUpon>MapView.cs</DependentUpon>
     </EmbeddedResource>
@@ -124,6 +139,7 @@
     <EmbeddedResource Include="View\SatelliteListForm.resx">
       <DependentUpon>SatelliteListForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -141,6 +157,10 @@
     <ProjectReference Include="..\Hadamard.Common\Hadamard.Common.csproj">
       <Project>{961ec1bf-1b95-451e-8fa5-0c7ca317a5b8}</Project>
       <Name>Hadamard.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hadamard.Presentation\Hadamard.Presentation.csproj">
+      <Project>{4F2C0716-8DC1-417D-8F98-D1C7AAD68911}</Project>
+      <Name>Hadamard.Presentation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@ namespace Hadamard.Common
 {
     public class HadamardIrcBot : IrcBot
     {
-        private static string _channel = "#da8Q_9RnPjm";
+        //private static string _channel = "#da8Q_9RnPjm";
 
         public IrcLocalUser LocalUser => _client.LocalUser;
         public IrcChannel ActiveChannel => _client.Channels.First();
@@ -35,6 +35,8 @@ namespace Hadamard.Common
                     RealName = "isReal"
                 };
             }
+
+            set { }
         }
 
         protected IDictionary<string, CommandProcessor> CommandProcessors
@@ -88,6 +90,8 @@ namespace Hadamard.Common
                 } ?? _commandProcessors;
             }
         }
+
+        public string Channel { get; set; }
 
         protected override void InitializeCommandProcessors()
         {

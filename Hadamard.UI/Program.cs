@@ -22,7 +22,7 @@ namespace Hadamard.UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(new SatelliteView());
+            Application.Run(new ChatView());
 
             /*
             try
