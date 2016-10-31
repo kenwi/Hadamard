@@ -30,8 +30,9 @@
         {
             this.txtSatelliteId = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtChat = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.btnConnect = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -43,7 +44,7 @@
             this.txtSatelliteId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtSatelliteId.Location = new System.Drawing.Point(8, 508);
             this.txtSatelliteId.Name = "txtSatelliteId";
-            this.txtSatelliteId.Size = new System.Drawing.Size(748, 20);
+            this.txtSatelliteId.Size = new System.Drawing.Size(610, 20);
             this.txtSatelliteId.TabIndex = 2;
             // 
             // splitContainer1
@@ -54,7 +55,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.txtChat);
             // 
             // splitContainer1.Panel2
             // 
@@ -63,14 +64,14 @@
             this.splitContainer1.SplitterDistance = 610;
             this.splitContainer1.TabIndex = 3;
             // 
-            // textBox1
+            // txtChat
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(610, 494);
-            this.textBox1.TabIndex = 3;
+            this.txtChat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtChat.Location = new System.Drawing.Point(0, 0);
+            this.txtChat.Multiline = true;
+            this.txtChat.Name = "txtChat";
+            this.txtChat.Size = new System.Drawing.Size(610, 494);
+            this.txtChat.TabIndex = 3;
             // 
             // textBox2
             // 
@@ -81,11 +82,21 @@
             this.textBox2.Size = new System.Drawing.Size(134, 494);
             this.textBox2.TabIndex = 4;
             // 
+            // btnConnect
+            // 
+            this.btnConnect.Location = new System.Drawing.Point(622, 508);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(134, 23);
+            this.btnConnect.TabIndex = 4;
+            this.btnConnect.Text = "Connect";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            // 
             // ChatView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 536);
+            this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.txtSatelliteId);
             this.Name = "ChatView";
@@ -106,7 +117,8 @@
 
         private System.Windows.Forms.TextBox txtSatelliteId;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtChat;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button btnConnect;
     }
 }

@@ -4,7 +4,6 @@
     {
         string BotNick { get; }
         string Channel { get; }
-
-        void Connect();
+        string Server { get; }
     }
 }

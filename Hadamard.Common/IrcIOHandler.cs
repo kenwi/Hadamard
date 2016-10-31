@@ -37,14 +37,14 @@ namespace Hadamard.Common
 
             client.Connected += (c, e) =>
             {
-                Console.WriteLine("+ Client Connected");
+                Console.WriteLine(@"+ Client connected");
                 OnClientConnected(c as IrcClient);
             };
 
             client.Registered += (c, e) =>
             {
                 _isRegistered = true;
-                Console.WriteLine("+ Client registered");
+                Console.WriteLine(@"+ Client connected");
                 (c as IrcClient).LocalUser.JoinedChannel += (localUser, channelArgs) => {
                     Console.WriteLine("+ Client joined channel " + channelArgs.Channel.Name);
 
