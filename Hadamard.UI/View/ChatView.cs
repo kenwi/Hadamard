@@ -30,11 +30,11 @@ namespace Hadamard.UI.View
         {
             InitializeComponent();
             Presenter = new ChatViewPresenter(this);
-            Presenter.ClientRegistered += (s, e) => SetText("Client registered: " + e.LocalUser.Client, txtChat);
-            Presenter.ChannelJoined += (s, e) => SetText("Client joined channel: " + e.Channel.Name, txtChat);
-            Presenter.Connecting += (s, e) => SetText("Connecting to server: " + e, txtChat);
-            Presenter.Connected += (s, e) => SetText("Connected to server:" + e.LocalUser.Client, txtChat);
-            Presenter.MessageReceived += (s, e) => SetText("Message received: " + e.Text, txtChat);
+            Presenter.ClientRegistered += (s, e) => SetText($"Client registered: {e.LocalUser.Client}", txtChat);
+            Presenter.ChannelJoined += (s, e) => SetText($"Client joined channel: {e.Channel.Name}", txtChat);
+            Presenter.Connecting += (s, e) => SetText($"Connecting to server: {e}", txtChat);
+            Presenter.Connected += (s, e) => SetText($"Connected to server:{e.LocalUser.Client}", txtChat);
+            Presenter.MessageReceived += (s, e) => SetText($"Message received: {e.Text}", txtChat);
             Presenter.UsersListReceived += (s, e) =>
             {
                 Users = e.Select(irc => irc.User.NickName).ToList();
