@@ -15,6 +15,7 @@ namespace Hadamard.UI.View
         public event EventHandler<StandardIrcClient> ClientRegistered;
         public event EventHandler<IrcChannelEventArgs> ChannelJoined;
         public event EventHandler<IrcMessageEventArgs> MessageReceived;
+        public event EventHandler<IrcChannelUserCollection> UsersListReceived;
 
         public IrcRegistrationInfo RegistrationInfo => new IrcUserRegistrationInfo()
         {
@@ -29,18 +30,28 @@ namespace Hadamard.UI.View
                 FloodPreventer = new IrcStandardFloodPreventer(30, 2000)
             };
 
-            _client.Registered += (sender, eventArgs) => {
-                ClientRegistered?.Invoke(this, sender as StandardIrcClient);
+            _client.Registered += (s, e) => {
+                ClientRegistered?.Invoke(this, s as StandardIrcClient);
                 _client.Channels.Join(view.Channel);
                 _client.LocalUser.JoinedChannel += (o, ircChannelEventArgs) =>
                 {
                     ChannelJoined?.Invoke(this, ircChannelEventArgs);
-                    ircChannelEventArgs.Channel.MessageReceived += (sender1, ircMessageEventArgs) =>
+                    ircChannelEventArgs.Channel.MessageReceived += (sender, ircMessageEventArgs) =>
                     {
                         MessageReceived?.Invoke(this, ircMessageEventArgs);
                     };
+
+                    ircChannelEventArgs.Channel.UsersListReceived += (sender, eventArgs) =>
+                    {
+                        UsersListReceived?.Invoke(this, (sender as IrcChannel).Users);
+                    };
                 };
             };
+        }
+
+        private void Channel_UsersListReceived(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public void Connect()
@@ -54,7 +65,7 @@ namespace Hadamard.UI.View
                 _client.Connected += (s, e) =>
                 {
                     connectedEvent.Set();
-                    Connected?.Invoke(this, _client);
+                    //Connected?.Invoke(this, _client);
                 };
                 _client.Connect(server, false, registrationInfo);
 

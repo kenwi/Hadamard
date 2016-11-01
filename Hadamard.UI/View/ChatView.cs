@@ -11,10 +11,11 @@ using System.Windows.Forms;
 using Hadamard.Presentation;
 using Hadamard.UI.Presenter;
 using IrcDotNet;
+using IrcDotNet.Collections;
 
 namespace Hadamard.UI.View
 {
-    public partial class ChatView : Form, IChatView
+    public partial class ChatView : Form, IChatView, INotifyPropertyChanged
     {
         private readonly ChatViewPresenter Presenter;
         public event EventHandler Initialize;
@@ -23,27 +24,30 @@ namespace Hadamard.UI.View
         public string BotNick { get; } = "Hadamard";
         public string Channel { get; } = "#da8Q_9RnPjm";
         public string Server { get; } = "chat.freenode.net";
+        public List<string> Users { get; set; }
 
-        private List<string> _messages = new List<string>();
-
-        public string Messages => string.Join(Environment.NewLine, _messages.Select(x => x + Environment.NewLine).ToArray());
-        
         public ChatView()
         {
             InitializeComponent();
             Presenter = new ChatViewPresenter(this);
-            btnConnect.Click += (s, e) => Presenter.Connect();
-
             Presenter.ClientRegistered += (s, e) => SetText("Client registered: " + e.LocalUser.Client, txtChat);
             Presenter.ChannelJoined += (s, e) => SetText("Client joined channel: " + e.Channel.Name, txtChat);
-            Presenter.Connecting += (s, server) => SetText("Connecting to server: " + server, txtChat);
-            Presenter.Connected += (s, client) => SetText("Connected to server:" + client.LocalUser.Client, txtChat);
-
-            Presenter.MessageReceived += (s, e) =>
+            Presenter.Connecting += (s, e) => SetText("Connecting to server: " + e, txtChat);
+            Presenter.Connected += (s, e) => SetText("Connected to server:" + e.LocalUser.Client, txtChat);
+            Presenter.MessageReceived += (s, e) => SetText("Message received: " + e.Text, txtChat);
+            Presenter.UsersListReceived += (s, e) =>
             {
-                SetText("Message received: " + e.Text, txtChat);
-                _messages.Add(e.Text);
+                Users = e.Select(irc => irc.User.NickName).ToList();
+                Users.ForEach(user => SetText(user, txtUsers));
+                SetText($@"Users in channel: {string.Join(", ", Users)}", txtChat);
             };
+            btnConnect.Click += (s, e) => Presenter.Connect();
+            //txtChat.DataBindings.Add("Text", this, "Messages", false, DataSourceUpdateMode.OnPropertyChanged);
+        }
+
+        public void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private delegate void SetTextCallback(string text, Control control);
@@ -55,34 +59,10 @@ namespace Hadamard.UI.View
                 this.Invoke(callback, new object[] {text, control});
             }
             else
-                control.Text += text + Environment.NewLine;
+            {
+                control.Text += $@"{text}{Environment.NewLine}";
+                NotifyPropertyChanged("Messages");
+            }
         }
     }
 }
-
-/*
-public class ChatMessages : INotifyPropertyChanged
-{
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    public ChatMessages(string text)
-    {
-        this.Text = text;
-    }
-
-    private string _text;
-    public string Text
-    {
-        get { return _text; }
-        set
-        {
-            _text = value + Environment.NewLine;
-            OnPropertyChanged("Text");
-        }
-    }
-}*/

@@ -31,7 +31,7 @@
             this.txtSatelliteId = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.txtChat = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtUsers = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -59,7 +59,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.textBox2);
+            this.splitContainer1.Panel2.Controls.Add(this.txtUsers);
             this.splitContainer1.Size = new System.Drawing.Size(748, 494);
             this.splitContainer1.SplitterDistance = 610;
             this.splitContainer1.TabIndex = 3;
@@ -73,14 +73,14 @@
             this.txtChat.Size = new System.Drawing.Size(610, 494);
             this.txtChat.TabIndex = 3;
             // 
-            // textBox2
+            // txtUsers
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(0, 0);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(134, 494);
-            this.textBox2.TabIndex = 4;
+            this.txtUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtUsers.Location = new System.Drawing.Point(0, 0);
+            this.txtUsers.Multiline = true;
+            this.txtUsers.Name = "txtUsers";
+            this.txtUsers.Size = new System.Drawing.Size(134, 494);
+            this.txtUsers.TabIndex = 4;
             // 
             // btnConnect
             // 
@@ -118,7 +118,7 @@
         private System.Windows.Forms.TextBox txtSatelliteId;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TextBox txtChat;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtUsers;
         private System.Windows.Forms.Button btnConnect;
     }
 }
