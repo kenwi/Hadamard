@@ -49,11 +49,6 @@ namespace Hadamard.UI.View
             };
         }
 
-        private void Channel_UsersListReceived(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Connect()
         {
             var server = View.Server;
@@ -65,7 +60,7 @@ namespace Hadamard.UI.View
                 _client.Connected += (s, e) =>
                 {
                     connectedEvent.Set();
-                    //Connected?.Invoke(this, _client);
+                    Connected?.Invoke(this, _client);
                 };
                 _client.Connect(server, false, registrationInfo);
 
