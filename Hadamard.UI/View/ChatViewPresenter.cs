@@ -43,7 +43,7 @@ namespace Hadamard.UI.View
 
                     ircChannelEventArgs.Channel.UsersListReceived += (sender, eventArgs) =>
                     {
-                        UsersListReceived?.Invoke(this, (sender as IrcChannel).Users);
+                        UsersListReceived?.Invoke(this, (sender as IrcChannel)?.Users);
                     };
                 };
             };
@@ -59,16 +59,20 @@ namespace Hadamard.UI.View
             {
                 _client.Connected += (s, e) =>
                 {
+                    // The Resharper engine does not figure out that the using block will never exit
+                    // before the delegate code is completed.
+
+                    // ReSharper disable AccessToDisposedClosure
                     connectedEvent.Set();
+                    // ReSharper enable AccessToDisposedClosure
                     Connected?.Invoke(this, _client);
                 };
                 _client.Connect(server, false, registrationInfo);
 
-                if (!connectedEvent.Wait(30000))
-                {
-                    _client.Dispose();
+                if (connectedEvent.Wait(30000))
                     return;
-                }
+
+                _client.Dispose();
             }
         }
     }
