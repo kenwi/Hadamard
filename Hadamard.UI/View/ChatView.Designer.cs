@@ -31,8 +31,8 @@
             this.txtSatelliteId = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.txtChat = new System.Windows.Forms.TextBox();
-            this.txtUsers = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
+            this.listUsers = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -59,7 +59,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.txtUsers);
+            this.splitContainer1.Panel2.Controls.Add(this.listUsers);
             this.splitContainer1.Size = new System.Drawing.Size(748, 494);
             this.splitContainer1.SplitterDistance = 610;
             this.splitContainer1.TabIndex = 3;
@@ -73,15 +73,6 @@
             this.txtChat.Size = new System.Drawing.Size(610, 494);
             this.txtChat.TabIndex = 3;
             // 
-            // txtUsers
-            // 
-            this.txtUsers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtUsers.Location = new System.Drawing.Point(0, 0);
-            this.txtUsers.Multiline = true;
-            this.txtUsers.Name = "txtUsers";
-            this.txtUsers.Size = new System.Drawing.Size(134, 494);
-            this.txtUsers.TabIndex = 4;
-            // 
             // btnConnect
             // 
             this.btnConnect.Location = new System.Drawing.Point(622, 508);
@@ -90,6 +81,15 @@
             this.btnConnect.TabIndex = 4;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
+            // 
+            // listUsers
+            // 
+            this.listUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listUsers.FormattingEnabled = true;
+            this.listUsers.Location = new System.Drawing.Point(0, 0);
+            this.listUsers.Name = "listUsers";
+            this.listUsers.Size = new System.Drawing.Size(134, 494);
+            this.listUsers.TabIndex = 4;
             // 
             // ChatView
             // 
@@ -105,7 +105,6 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -118,7 +117,7 @@
         private System.Windows.Forms.TextBox txtSatelliteId;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TextBox txtChat;
-        private System.Windows.Forms.TextBox txtUsers;
         private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.ListBox listUsers;
     }
 }

@@ -38,7 +38,10 @@ namespace Hadamard.UI.View
             Presenter.UsersListReceived += (s, e) =>
             {
                 Users = e.Select(irc => irc.User.NickName).ToList();
-                Users.ForEach(user => SetText(user, txtUsers));
+                var binding = new BindingSource {DataSource = Users};
+                listUsers.DataSource = binding;
+                listUsers.DisplayMember = "Users";
+                binding.ResetBindings(false);
                 SetText($@"Users in channel: {string.Join(", ", Users)}", txtChat);
             };
             btnConnect.Click += (s, e) => Presenter.Connect();
@@ -62,6 +65,21 @@ namespace Hadamard.UI.View
             {
                 control.Text += $@"{text}{Environment.NewLine}";
                 NotifyPropertyChanged("Messages");
+            }
+        }
+
+        private delegate void AddItemCallback(string text, ListBox control);
+        private void AddItem(string text, ListBox control)
+        {
+            if (control.InvokeRequired)
+            {
+                var callback = new AddItemCallback(SetText);
+                this.Invoke(callback, new object[] { text, control });
+            }
+            else
+            {
+                control.Items.Add(text);
+                NotifyPropertyChanged("Items");
             }
         }
     }
