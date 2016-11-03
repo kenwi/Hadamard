@@ -24,7 +24,7 @@ namespace Hadamard.UI.View
         public string BotNick { get; } = "Hadamard";
         public string Channel { get; } = "#da8Q_9RnPjm";
         public string Server { get; } = "chat.freenode.net";
-        public List<string> Users { get; set; }
+        public List<IrcUser> Users { get; set; }
 
         public ChatView()
         {
@@ -37,11 +37,11 @@ namespace Hadamard.UI.View
             Presenter.MessageReceived += (s, e) => SetText($"Message received: {e.Text}", txtChat);
             Presenter.UsersListReceived += (s, e) =>
             {
-                Users = e.Select(irc => irc.User.NickName).ToList();
-                var binding = new BindingSource {DataSource = Users};
-                listUsers.DataSource = binding;
-                listUsers.DisplayMember = "Users";
-                binding.ResetBindings(false);
+                Users = e.Select(irc => irc.User).ToList();
+
+                SetBinding(new BindingSource {DataSource = Users}, listUsers);
+
+                //Users.ForEach(user => AddItem(user.NickName, listUsers));
                 SetText($@"Users in channel: {string.Join(", ", Users)}", txtChat);
             };
             btnConnect.Click += (s, e) => Presenter.Connect();
@@ -80,6 +80,23 @@ namespace Hadamard.UI.View
             {
                 control.Items.Add(text);
                 NotifyPropertyChanged("Items");
+            }
+        }
+
+        private void SetBinding(BindingSource binding, ListBox control)
+        {
+            if (!control.InvokeRequired)
+            {
+                var callback = new AddItemCallback(SetText);
+                this.Invoke(callback, new object[] {binding, control});
+            }
+            else
+            {
+                control.DataSource = binding;
+                control.DisplayMember = "NickName";
+                //control.ValueMember = "NickName";
+                binding.ResetBindings(false);
+                NotifyPropertyChanged("Binding");
             }
         }
     }
